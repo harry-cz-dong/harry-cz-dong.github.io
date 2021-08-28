@@ -117,12 +117,11 @@ h2, h3, p, table, li {
 
 .title h1 {
   font-family: 'Playfair Display';font-size: 60px;
-  color: black;
+  color: white;
   display: inline;
   animation-name: fade;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-  animation-timing-function: steps(1);	
 }
 
 
@@ -139,23 +138,23 @@ h2, h3, p, table, li {
 	animation-delay: 0.2s;
 }
 .title .l6 {
-	animation-delay: 0.85s;
+	animation-delay: 0.25s;
 }
 .title .l7 {
-	animation-delay: 0.9s;
+	animation-delay: 0.3s;
 }
 .title .l8 {
-	animation-delay: 0.95s;
+	animation-delay: 0.35s;
 }
 .title .l9 {
-	animation-delay: 1s;
+	animation-delay: 0.4s;
 }
 .title .l10 {
-	animation-delay: 1.05s;
+	animation-delay: 0.45s;
 }
 
 
 @keyframes fade {
-  0% {background-color: white; color: black;}
-  100% {background-color: #E86100; color: white;}
+  0% {background-color: white;}
+  100% {background-color: #E86100;}
 }
