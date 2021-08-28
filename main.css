@@ -91,6 +91,12 @@ h2, h3, p, table, li {
   float: right;
 }
 
+@media only screen and (max-width: 600px) {
+  .nav_bar li a{
+    padding: 7px 8px;
+  }
+}
+
 .nav_bar li a {
   display: block;
   color: black;
@@ -124,6 +130,12 @@ h2, h3, p, table, li {
   animation-fill-mode: forwards;
 }
 
+@media only screen and (max-width: 600px) {
+  .title {
+    height: 80%;
+	width: 80%;
+  }
+}
 
 .title .l2 {
 	animation-delay: 0.05s;
