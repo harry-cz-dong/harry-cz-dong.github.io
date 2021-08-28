@@ -6,9 +6,9 @@ a:link, a:visited {
 }
 
 a:hover, a:active {
-  color: #E86100;
-  text-decoration: none;
-  opacity: 0.80;
+  color: #232323;
+  text-decoration: underline;
+  text-decoration-color: #f3883c;
 }
 
 .sub_link {
@@ -18,6 +18,10 @@ a:hover, a:active {
 
 .link {
   text-decoration: underline;
+}
+
+.link a:hover, .link a:active {
+  color: #f3883c;
 }
 
 /* Content style*/
@@ -71,7 +75,7 @@ h2, h3, p, table, li {
 .icon {
 	margin-left: 10px;
 	margin-right: 10px;
-	display: inline
+	display: inline;
 }
 
 /* Nav Bar style */
@@ -97,7 +101,7 @@ h2, h3, p, table, li {
 
 .nav_bar li a:hover {
   color: white;
-  background-color: #FF8000;
+  background-color: #f3883c;
 }
 
 
