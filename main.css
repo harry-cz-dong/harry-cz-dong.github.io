@@ -92,9 +92,11 @@ h2, h3, p, table, li {
 }
 
 @media only screen and (max-width: 600px) {
-  .nav_bar li a{
-    padding: 7px 8px;
+  .nav_bar {
+	display: inline-block;
+	margin: auto;
   }
+
 }
 
 .nav_bar li a {
@@ -131,9 +133,8 @@ h2, h3, p, table, li {
 }
 
 @media only screen and (max-width: 600px) {
-  .title {
-    height: 80%;
-	width: 80%;
+  .title h1{
+    font-size: 50px;
   }
 }
 
