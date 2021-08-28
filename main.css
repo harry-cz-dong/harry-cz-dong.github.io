@@ -31,23 +31,23 @@ h2, h3, p, table, li {
 
 .page_title, .subtitle{
   text-align: left;
-  margin-left: 20%;
+  margin-left: 10%;
   margin-top: 50px;
 }	
 
 
 .writing, .posts {
   text-align: left;
-  margin-left: 20%;
+  margin-left: 10%;
   color: #232323;
-  width: 70%;
+  width: 80%;
 }	
 
 .frame {
   border-top: solid;
   padding-bottom: 50px;
   border-width: 1px;
-  width: 70%;
+  width: 80%;
   display: table;
   margin: auto;
   border-color: #737373;
