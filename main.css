@@ -142,6 +142,7 @@ h2, h3, p, table, li {
   color: white;
   display: inline;
   background-color: #E86100;
+  padding: 10px;
 }
 
 @media only screen and (max-width: 600px) {
