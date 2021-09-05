@@ -158,3 +158,10 @@ h2, h3, p, table, li {
   }  
 
 
+/* Footer */
+footer {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  font-size: 12px;
+}

@@ -38,18 +38,20 @@ h2, h3, p, table, li {
   width: 80%;
 }	
 
-.frame, .frame_no_border {
-  border-top: solid;
-  border-color: #737373;
-  border-width: 1px;
-  width: 80%;
+.posts td{
+  padding-top: 10px;	
+  padding-bottom: 10px;
+}
+
+.frame, .frame_grey {
+  width: 100%;
   padding-bottom: 50px;
   display: table;
   margin: auto;
 }
 
-.frame_no_border {
-  border-width: 0px;
+.frame_grey {
+  background-color: #f0f0f0;
 }
 
 /* Blocks */
@@ -59,22 +61,6 @@ h2, h3, p, table, li {
   border-color: #f3883c;
   border-style: solid;
   border-width: 1px;
-}
-
-
-
-/* Footer style */
-.footer {
-	margin: auto;
-	display: table;
-	margin-top: 80px;
-	margin-bottom: 50px;
-}
-
-.icon {
-	margin-left: 10px;
-	margin-right: 10px;
-	display: inline;
 }
 
 /* Nav Bar style */
@@ -116,58 +102,71 @@ h2, h3, p, table, li {
 
 
 /* Title style */
-.title_card {
-  background-image: url(img/title_card.png);
-  background-size: 100% 100%;
-  margin-top: 20px;
-  padding-bottom: 10px;
-}
 
 .title_link:link, .title_link:visited{
-  color: white;
+  color: black;
+}
+
+.title_card {
+  margin-top: 30px;
 }
 
 .title_card h3 {
   text-align: center;
-  font-size: 28px;  
+  font-size: 20px;  
+}
+
+.title_card h2 {
+  font-size: 20px;  
 }
 
 .title {
-  padding: 50px;
+  padding: 20px;
   margin: auto;
   display: table;
 }
 
 .title h1 {
-  font-family: 'Playfair Display';font-size: 60px;
-  color: white;
+  font-family: 'Playfair Display';font-size: 40px;
+  color: black;
   display: inline;
-  background-color: #E86100;
   padding: 10px;
 }
 
+.footer {
+	margin: auto;
+	display: table;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.icon {
+	margin-left: 10px;
+	margin-right: 10px;
+	display: inline;
+}
+
+
 @media only screen and (max-width: 600px) {
-  .title h1{	
-    font-size: 50px;
-  }
   .right_card {
 	display: none;
   }
 }
 
-  
-
-@media only screen and (min-width: 600px) {
-	.right_card {
-	  display: inline-block;
-	  width: 50%;
-	  color: white;
-	  margin-left: 5%;
-	}
-	.left_card {
-	  margin-left: 5%;
-	  display: inline-block;
-	}
-		
+.left_card .profile {
+  display: table;
+  margin: auto;
 }
+
+.right_card, .left_card {
+	  display: inline-block;	  
+	  margin-left: 5%;
+	  vertical-align: top;
+	}
+.right_card {
+
+  width: 50%;
+}
+ 
+
 
