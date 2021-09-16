@@ -1,7 +1,12 @@
 Add mugshot
 
-Implement hover image, pick good pictures
-
 Implement image gallery
 
 Fill out projects
+
+
+
+----------------------------
+
+Code is a bit spaghetti - some of it is from CodePen so contains extraneous stuff
+IDK what best practices are
