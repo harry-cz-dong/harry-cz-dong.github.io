@@ -19,8 +19,8 @@ a:hover, a:active {
 }
 
 /* Content style*/
-h2, h3, p, table, li {
-  font-family: 'Montserrat';
+h1, h2, h3, p, table, li {
+  font-family: 'Raleway';
   line-height: 160%;
 }
 
@@ -31,16 +31,24 @@ h2, h3, p, table, li {
 }	
 
 
-.writing, .posts {
+.writing, .writing_grey, .thumb {
   text-align: left;
   margin-left: 10%;
   color: #232323;
   width: 80%;
 }	
 
-.posts td{
-  padding-top: 10px;	
-  padding-bottom: 10px;
+.writing_grey {
+  color: #737373;	
+}
+
+.tech {
+  font-family: Courier New;	
+}
+
+
+.thumb img{
+  padding-right: 3%;
 }
 
 .frame, .frame_grey {
@@ -127,7 +135,7 @@ h2, h3, p, table, li {
 }
 
 .title h1 {
-  font-family: 'Playfair Display';font-size: 40px;
+  font-size: 25px;
   color: black;
   display: inline;
   padding: 10px;
@@ -165,7 +173,7 @@ h2, h3, p, table, li {
 	}
 .right_card {
 
-  width: 50%;
+  width: 57%;
 }
  
 

@@ -1,3 +1,7 @@
-Consider a more personable redesign with:
-- alt css layout
-- professional picture of yourself
+Add mugshot
+
+Implement hover image, pick good pictures
+
+Implement image gallery
+
+Fill out projects
