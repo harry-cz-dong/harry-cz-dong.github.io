@@ -10,6 +10,11 @@ a:hover, a:active {
   text-decoration-color: #f3883c;
 }
 
+a[target="_blank"]::after {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+  margin: 0 3px 0 5px;
+}
+
 .link {
   text-decoration: underline;
 }
@@ -20,7 +25,7 @@ a:hover, a:active {
 
 /* Content style*/
 h1, h2, h3, p, table, li {
-  font-family: 'Raleway';
+  font-family: 'Source Sans Pro';
   line-height: 160%;
 }
 
@@ -35,7 +40,9 @@ h1, h2, h3, p, table, li {
   text-align: left;
   margin-left: 10%;
   color: #232323;
-  width: 80%;
+  width: 56%;
+  text-align:justify;
+  font-size: 17px;
 }	
 
 .writing_grey {
@@ -168,8 +175,7 @@ h1, h2, h3, p, table, li {
 	  vertical-align: top;
 	}
 .right_card {
-
-  width: 57%;
+  width: 70%;
 }
  
 
@@ -186,10 +192,12 @@ h1, h2, h3, p, table, li {
   position: relative;
   float: left;
   margin-right: 3%;
+  
 }
 
 .content .content-overlay {
-
+  
+  overflow: hidden;
   background: rgba(0,0,0,0.7);
   position: absolute;
   width: 220px;

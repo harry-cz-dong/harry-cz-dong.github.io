@@ -7,6 +7,8 @@ Fill out projects
 
 
 ----------------------------
+Debug why project overlay is buggy near middle
 
-Code is a bit spaghetti - some of it is from CodePen so contains extraneous stuff
+Code is a bit spaghetti - some of it is from CodePen so contains extraneous stuff,
+probably should've used flexboxes more
 IDK what best practices are
