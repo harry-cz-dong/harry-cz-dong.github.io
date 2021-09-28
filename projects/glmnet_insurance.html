@@ -2,33 +2,248 @@
 
 <html lang="en">
 <head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+  
+  <link rel="stylesheet" href="../alt.css">
+  
+  
+	
 	<title>Insurance claims</title>
 	<link rel="icon" type="image/png" href="../favicon.png"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../alt.css">
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
 </head>
 
-<body class="fade_in">
+<body onload="loadTooltip()">
 	
 	
-	<ul class="nav_bar">
-	  <li style="border-bottom: solid; border-color:#E86100; margin-right:50px;"><a href="../projects">Projects</a></li>
-	  <li ><a href="../index">Home</a></li>
+	<div class="nav_bar">
+	<a href="projects" style="border-bottom: solid; border-color:#E86100"><p>Projects</p></a>
+	<a href="index" ><p>Home</p></a>
+	</div>
+	
+	
+	<div class="frame_grey">
+	<div class="content">
+	<h2 class="page_title" > Predicting motor insurance claims losses</h2>
+	
+		<h3 class="subtitle" > Summary </h3>
+		<div class="article_head">
+			<div class="head_text">
+			
+			<p class = "writing"> Insurers want to charge policyholders based on their level of risk. This is done by segmenting
+			the policyholders based on characteristics, called rating factors, which are predictors of their claims. </p>
+			
+			<p class="writing"> I performed this process on the <span class="link"><a href="ausprivauto0405" target="_blank"><span class = "tech">ausprivauto0405</span></a></span>
+			dataset. It contains data from 67,856 compulsory third party motor insurance policies taken out in New South Wales, in the years 2004-2005. </p> 
+			<a href="#" class="title_link"><button class="button"> View Code  </button> </a>
+			
+			</div>
+			
+			<div class="head_image">
+			<img src="glmnet_insurance_dat/splash.jpg" style="width: 100%; height: 100%; object-fit: cover;">  
+			</div>
+		</div>	
+		<div class="scroll_arrow">
+		<a href="#article"><img src="../img/arrow.png" style="height:30px; width:35px;"></img></a>
+		</div>	
+	</div>
+	</div>
+	
+	
+	
+<div class="content">
+	<h3 class="subtitle" id="article"> Initial Steps </h3>
+	<p class="writing">Preparing the data:
+	<ul class="item_list">	
+		<li> Loss Cost was calculated as Total Claim Amount / <span class="my_tooltip">Exposure<span class="tooltiptext" id = "tt1"></span></span>.
+		<li >Ideally, all of the predictors should be categorical variables, so we can split the policyholders into a limited number of classes. 
+		However, the <span class="tech">VehValue</span> variable is a numeric variable, so it was binned into 4 groups using 
+		<span class="my_tooltip">exposure-weighted quartiles<span class="tooltiptext" id = "tt2"></span></span>.
+		<li >The <span class="tech">VehBody</span> variable contains very sparse categories ('Roadster', 'Bus', 'Convertible' and 'Motorised Caravan')
+		with few entries, which can cause performance and stability issues in many models. Since they represent only 0.41% of all exposures, these categories were dropped. </li>
 	</ul>
+	</p>
 	
-	<h2 class="page_title"> Estimating insurance claims with a regularised GLM</h2>
-	<p class="writing_grey">Harry Dong</p>
+	<p class="writing">Exploration: </p>
 	
-	<h3 class="subtitle"> Problem </h3>
-	<p class = "writing">Scenario: Insurers segment policyholders by characteristics (called rating factors). </p>
-	<p class="writing"> Dataset: <span class="link"><a href="ausprivauto0405" target="_blank"><span class = "tech">ausprivauto0405</span></a></span>
-	contains data from policyholders of a motor insurance product. </p>
+	
+	
+
+   <div id="myCarousel" class="carousel slide" data-ride="carousel" data-wrap="false" data-interval="false">
+   
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="glmnet_insurance_dat/histogram.png" ></img>
+		
+      </div>
+
+	  <div class="item">
+		<img src="glmnet_insurance_dat/cramerv.png"></img>
+	  </div>
+
+    </div>
+    
+	 <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+
+	
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+	<p class="writing">Firstly, we can see the histogram of the Loss Cost. As typical, it has a right-skewed distribution, with
+	most of the sizes concentrated in the smaller amounts. However, there is a spike of zero claims (93.2%), which may neccessitate
+	a Tweedie model to account for this.</p>
+	
+	<p class="writing"> Secondly, using  <span class="my_tooltip">Cramer's V <span class="tooltiptext" id = "tt3"></span></span>as a metric,  
+	we check for any dependence between the variables, as highly correlated predictors contain redundant information, and may reduce the accuracy of predictive models. 
+	However, there are only minor correlations, the largest being 0.56 between <span class="tech">VehValue</span> and <span class="tech">VehAge</span>. </p> 
+	
+	
+	
+	<h3 class="subtitle"> Modelling </h3>
+	<p class="writing"> Generalised linear models (GLMs) extend linear regressions to allow the response variable to be drawn from a distribution other
+	than a normal distribution. To account for the right-tailed distribution with high incidence of zeros, the Tweedie distribution (with power parameter = 1.5) is used to model 
+	the Loss Cost:</p>
+	
+	<table>
+		<tr>
+			<th> Response Variable</th>
+			<th> Distribution</th>
+			<th> Weight</th>
+			<th> Predictor Variables</th>
+		</tr> 
+		<tr>
+			<td> Loss Cost</td>
+			<td> Tweedie <br> (p = 1.5)</td>
+			<td> Exposure </td>
+			<td rowspan=2> <span class="tech">VehAge, VehValue, Vehbody, DrivAge, Gender</span></td>
+		</tr> 
+
+	</table>
+	
+	<p class = "writing"> 
+	To refine this benchmark model, we can add variable interactions, which represent effects 
+	from the combination of two variables. Say that males who drive trucks are extra likely to get into 
+	accidents; this is an example of an interaction between <span class = "tech">Gender</span> and <span class = "tech">VehBody</span>.
+	
+	Based on interaction plots (see Notes), we add interactions between 
+	<span class = "tech">Gender</span>, <span class = "tech">VehBody</span> and 
+	<span class = "tech">Gender</span>, <span class = "tech">DrivAge</span> to the model. 
+	</p>	
+	
+	
+	<p class="writing"> 
+		However, when we add more interaction terms to the model, there is a higher chance of the model picking up on random 
+		noise unrelated to the trend. To mitigate this, we apply LASSO regularisation,
+		which penalises higher values of predicted coefficients, shrinking them towards zero. Basically, it encourages the model to hone in on a 
+		smaller set of relevant and meaningful variables. The parameter λ controls how heavily the coefficients are shrunk. It was tuned to
+		λ = 0.46, which minimised the 
+		<span class="my_tooltip">cross-validated error<span class="tooltiptext" id = "tt4"></span></span>.
+		
+
+    </p>
+	
+	
+	
+	
+	<h3 class="subtitle"> Results </h3>
+	
+	<p class="writing"> I constructed the model using 80% of the dataset; the remaining 20% can be now used for testing. 
+	Using this withheld data, we can calculate the predicted frequency and severity for each policyholder, and compare them to the actual values.</p>
+
+	
+	<p class="writing">Let's compare the <span class="my_tooltip">RMSE<span class="tooltiptext" id = "tt5"> </span></span>
+	of our model with the benchmark GLM. We can ensure the stability of our results by bootstrapping, i.e. resampling the test data 1000 times and recalculating the error using the replicated data. The following plot shows the distributions of the model errors: </p> 
+	
+	<div class="article_image">
+	  <img src="glmnet_insurance_dat/bootstrap.png" ></img>
+	</div>
+	
+	<p class = "writing">As you can see, the improved model performs better, with both a lower average error and smaller spread in 
+    errors compared to the benchmark model.</p>
+	
+	
+	<p class="writing">In these "lift charts", we have ranked the predicted values in ascending order, and placed them into 10 equal-exposure groups. 
+	Then, we can compare the average predicted losses and actual losses observed within each group:  </p>
+	
+	<div class="article_image">
+	  <img src="glmnet_insurance_dat/lift_1.png"></img>
+	  <img src="glmnet_insurance_dat/lift_2.png"></img>
+	</div>
+	
+	<p class = "writing">The improved model does a better job at predicting the actual losses. It also sorts the policyholders into groups of
+	roughly increasing risk, unlike the benchmark model, which is more jagged.</p>
+	</div>  
+	
+	
+	
+
+	<div class="content" >
+	<h3 class="subtitle" style="display:inline-block"> Notes </h3> 
+	<button onclick="toggleNotes()" id="notes_button" style="border:none; display: inline-block; margin-left: 10px; font-family: Lato">show ▼</button>
+	<div id="notes" style="display: none">
+	
+	<p class="writing" id="n"> Exposure: Exposure measures the degree to which a policyholder is exposed to risk. In this context, a policyholder with 0.5 exposure has had their policy in place for half a year on the date the data was collected.</p>
+	
+	<p class="writing" id="n"> Exposure-weighted quartiles: The data is firstly sorted, and then divided into 4 groups such that the sum of exposures within each group is approximately equal. </p>
+	
+	<p class="writing" id="n"> Cramer's V: Cramer's V measures the dependence between two categorical variables.</p>
+	
+	<p class="writing" id="n"> Cross-validated error: The error metric used is deviance. Cross-validation </p>
+	
+	<p class="writing" id="n"> RMSE: The root-mean square error measures the error of the model, by comparing the predicted and actual values in the fitted data. It is calculated as \( \sqrt{\sum_{i = 0}^{n} (y_i - y_i)^2 / n} \) </p>
+	
+	<img class="article_image" src="glmnet_insurance_dat/interaction.png"></img>
+	</p>
+	</div>
+
+	
+	
+
+	<script>
+	function toggleNotes() {
+	  var x = document.getElementById("notes");
+	  if (x.style.display == "none") {
+		x.style.display = "block";
+		document.getElementById("notes_button").innerHTML = "hide ▲";
+	  } else {
+		x.style.display = "none";
+		document.getElementById("notes_button").innerHTML = "show ▼";
+	  }
+	}
+	
+	function loadTooltip() {
+		var z = document.getElementByClassName("n").innerHTML;
+		for (let i = 0; i < 5; i++) {
+			window.alert(n[i]);
+		}
+	}
+	</script>
+ 
 
 
 </body>
+
 
 
 </html>

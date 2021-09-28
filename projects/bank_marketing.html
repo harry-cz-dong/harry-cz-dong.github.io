@@ -2,34 +2,38 @@
 
 <html lang="en">
 <head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 	<title>Bank marketing</title>
 	<link rel="icon" type="image/png" href="../favicon.png"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../alt.css">
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
 </head>
 
-<body class="fade_in">
+<body>
 	
 	
-	<ul class="nav_bar">
-	  <li style="border-bottom: solid; border-color:#E86100; margin-right:50px;"><a href="../projects">Projects</a></li>
-	  <li ><a href="../index">Home</a></li>
-	</ul>
+	<div class="nav_bar">
+	  <a href="projects" style="border-bottom: solid; border-color:#E86100"><p>Projects</p></a>
+	  <a href="index" ><p>Home</p></a>
+	</div>
 	
-	<h2 class="page_title"> Predicting the success of a bank telemarketing campaign </h2>
-	<p class="writing_grey">Harry Dong</p>
-
 	
-	<h3 class="subtitle"> Problem </h3>
+	<div class="content">
+	<h2 class="page_title" > Predicting the success of a bank telemarketing campaign </h2>
+	
+	<h3 class="subtitle"> Summary </h3>
 	<p class="writing"> Using various machine learning techniques, I analysed data from a Portuguese bank, 
 	and explored which client characteristics are correlated with a successful marketing campaign. I mainly used the <span class="tech">caret</span> package
     in R to fit and evaluate the models. </p>
 	<p class="writing"> This is based on an old undergrad project, which I've expanded by adding a variety of classification models.</p>
-	<p class="writing"> <span class="link"><a href="../files/Bank Marketing.pdf">Report</a></span> </p>
-
+	<a href="../files/Bank Marketing.pdf" class="title_link"><button class="button"> Report </button> </a>
+    </div>
 </body>
 
 

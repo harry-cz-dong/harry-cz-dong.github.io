@@ -1,14 +1,48 @@
-Add mugshot
+Notes
+Set up data dictionary
+Projects page, bank marketing page
+Flexbox projects
 
-Implement image gallery
 
-Fill out projects
+
+-----------------------------
+
+Post-deployment fixes:
+- Insert generative element - probably will just have placeholder for now
+- Deal with shrink and mobile layout
+
+
+Future improvements:
+- More sophisticated models like XGBoost...I actually had a try with it
+but performance was about the same as GLM
+- GET BETTER DATA - MORE ENTRIES, DIMENSIONS AND YEARS
+
+
+
+
+- Residual plot as 'diagnosis' for modelling section
+- Balance property
+- Pick most populous class as baseline?
 
 
 
 ----------------------------
-Debug why project overlay is buggy near middle
 
-Code is a bit spaghetti - some of it is from CodePen so contains extraneous stuff,
-probably should've used flexboxes more
-IDK what best practices are
+
+Things I've learned:
+
+For horizontal: Use % to make things stretch, Pixel widths for constant elements like icons,
+use set margins and widths as variables if you're reusing them a lot  
+
+Throw things into a div and align them, rather than align elements
+individually
+
+Use flexboxes to have elements side by side, fill the divs to see placement
+
+
+-----------------------------
+
+<li> Gradient boosting: This technique essentially combines the predictions of simple models to form a more powerful model.
+		This  <span class="link"><a href="#">article</a></span> gives a more detailed explanation.
+		We use the <span class="tech">XGBoost</span> library, which is a handy and popular implementation.</li>
+
