@@ -41,9 +41,9 @@
 			<p class = "writing"> Insurers want to charge policyholders based on their level of risk. This is done by segmenting
 			the policyholders based on characteristics, called rating factors, which are predictors of their claims. </p>
 			
-			<p class="writing"> I performed this process on the <span class="link"><a href="ausprivauto0405" target="_blank"><span class = "tech">ausprivauto0405</span></a></span>
-			dataset. It contains data from 67,856 compulsory third party motor insurance policies taken out in New South Wales, in the years 2004-2005. </p> 
-			<a href="#" class="title_link"><button class="button"> View Code  </button> </a>
+			<p class="writing"> I performed this process on the <span class="link"><a href="glmnet_insurance_dat/data" target="_blank"><span class = "tech">ausprivauto0405</span></a></span>
+			dataset. It contains 67,856 entries, based on compulsory third party motor insurance policies taken out in New South Wales, in the years 2004-2005. </p> 
+			<a href="https://github.com/harry-cz-dong/projects/tree/main/motor_insurance" class="title_link"><button class="button"> View Code  </button> </a>
 			
 			</div>
 			
@@ -63,10 +63,10 @@
 	<h3 class="subtitle" id="article"> Initial Steps </h3>
 	<p class="writing">Preparing the data:
 	<ul class="item_list">	
-		<li> Loss Cost was calculated as Total Claim Amount / <span class="my_tooltip">Exposure<span class="tooltiptext" id = "tt1"></span></span>.
+		<li> Loss Cost was calculated as Total Claim Amount / <span class="my_tooltip">Exposure<span class="tooltiptext" ></span></span>.
 		<li >Ideally, all of the predictors should be categorical variables, so we can split the policyholders into a limited number of classes. 
 		However, the <span class="tech">VehValue</span> variable is a numeric variable, so it was binned into 4 groups using 
-		<span class="my_tooltip">exposure-weighted quartiles<span class="tooltiptext" id = "tt2"></span></span>.
+		<span class="my_tooltip">exposure-weighted quartiles<span class="tooltiptext"></span></span>.
 		<li >The <span class="tech">VehBody</span> variable contains very sparse categories ('Roadster', 'Bus', 'Convertible' and 'Motorised Caravan')
 		with few entries, which can cause performance and stability issues in many models. Since they represent only 0.41% of all exposures, these categories were dropped. </li>
 	</ul>
@@ -114,7 +114,7 @@
 	most of the sizes concentrated in the smaller amounts. However, there is a spike of zero claims (93.2%), which may neccessitate
 	a Tweedie model to account for this.</p>
 	
-	<p class="writing"> Secondly, using  <span class="my_tooltip">Cramer's V <span class="tooltiptext" id = "tt3"></span></span>as a metric,  
+	<p class="writing"> Secondly, using  <span class="my_tooltip">Cramer's V <span class="tooltiptext"></span></span>as a metric,  
 	we check for any dependence between the variables, as highly correlated predictors contain redundant information, and may reduce the accuracy of predictive models. 
 	However, there are only minor correlations, the largest being 0.56 between <span class="tech">VehValue</span> and <span class="tech">VehAge</span>. </p> 
 	
@@ -158,7 +158,7 @@
 		which penalises higher values of predicted coefficients, shrinking them towards zero. Basically, it encourages the model to hone in on a 
 		smaller set of relevant and meaningful variables. The parameter λ controls how heavily the coefficients are shrunk. It was tuned to
 		λ = 0.46, which minimised the 
-		<span class="my_tooltip">cross-validated error<span class="tooltiptext" id = "tt4"></span></span>.
+		<span class="my_tooltip">cross-validated error<span class="tooltiptext"></span></span>.
 		
 
     </p>
@@ -172,7 +172,7 @@
 	Using this withheld data, we can calculate the predicted frequency and severity for each policyholder, and compare them to the actual values.</p>
 
 	
-	<p class="writing">Let's compare the <span class="my_tooltip">RMSE<span class="tooltiptext" id = "tt5"> </span></span>
+	<p class="writing">Let's compare the <span class="my_tooltip">RMSE<span class="tooltiptext" > </span></span>
 	of our model with the benchmark GLM. We can ensure the stability of our results by bootstrapping, i.e. resampling the test data 1000 times and recalculating the error using the replicated data. The following plot shows the distributions of the model errors: </p> 
 	
 	<div class="article_image">
@@ -203,17 +203,22 @@
 	<button onclick="toggleNotes()" id="notes_button" style="border:none; display: inline-block; margin-left: 10px; font-family: Lato">show ▼</button>
 	<div id="notes" style="display: none">
 	
-	<p class="writing" id="n"> Exposure: Exposure measures the degree to which a policyholder is exposed to risk. In this context, a policyholder with 0.5 exposure has had their policy in place for half a year on the date the data was collected.</p>
+	<p class= "n writing"> Exposure: measures the degree to which a policyholder is exposed to risk. In this context, a policyholder with 0.5 exposure has had their policy in place for half a year on the date the data was collected.</p>
 	
-	<p class="writing" id="n"> Exposure-weighted quartiles: The data is firstly sorted, and then divided into 4 groups such that the sum of exposures within each group is approximately equal. </p>
+	<p  class= "n writing"> Exposure-weighted quartiles: The data is firstly sorted, and then divided into groups such that the sum of exposures within each group is approximately equal. </p>
 	
-	<p class="writing" id="n"> Cramer's V: Cramer's V measures the dependence between two categorical variables.</p>
+	<p  class="n writing"> Cramer's V: Say that we have two categorical variables \( X, Y \) which can take on values 
+	\(i = \{1,...,r \} \) and \(j = \{1,...,k \} \) respectively. Then, we can calculate their dependence by \(V =  \frac{\chi^2 / n }{\min(k-1, r-1)}\), where \(\chi^2 = \sum_{i, j} \frac{n_{ij} - n_i n_j / n}{n_i n_j / n} \).</p>
 	
-	<p class="writing" id="n"> Cross-validated error: The error metric used is deviance. Cross-validation </p>
+	<p  class="n writing">Cross-validated error: In cross-validation, we split the data into \(k\) groups. We fit the model on \(k - 1\) groups, and calculate the error using the remaining group (AKA the testing group). This process is repeated until each group has been used as the testing group, and we find the mean error from the \(k\) values calculated. This method of recaculating and averaging errors gives a more unbiased value. </p>
 	
-	<p class="writing" id="n"> RMSE: The root-mean square error measures the error of the model, by comparing the predicted and actual values in the fitted data. It is calculated as \( \sqrt{\sum_{i = 0}^{n} (y_i - y_i)^2 / n} \) </p>
+	<p  class="n writing">RMSE: The root-mean square error measures the error of the model, by comparing the predicted and actual values in the fitted data. It is calculated as \( \sqrt{\sum_{i = 0}^{n} (y_i - \hat{y_i})^2 / n} \) where \(\hat{y_i} \) is the predicted value, \( y_i \) is the actual value,
+	and \( n \) is the number of observations.</p>
 	
+	<p class = "writing">Interaction plots:
 	<img class="article_image" src="glmnet_insurance_dat/interaction.png"></img>
+	Non-parallel lines are indications of variable interactions. For example, male truck drivers have significantly higher average losses than female truck drivers, indicating unequal effects of gender on average losses for vehicle body.
+	
 	</p>
 	</div>
 
@@ -233,14 +238,15 @@
 	}
 	
 	function loadTooltip() {
-		var z = document.getElementByClassName("n").innerHTML;
-		for (let i = 0; i < 5; i++) {
-			window.alert(n[i]);
-		}
+	  var x = document.getElementsByClassName("n writing");
+	  var y = document.getElementsByClassName("tooltiptext");
+	  for (let i = 0; i < x.length; i++) {
+		y[i].innerHTML = x[i].innerHTML;
+	  }
 	}
+
 	</script>
  
-
 
 </body>
 

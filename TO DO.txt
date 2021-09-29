@@ -1,7 +1,5 @@
-Notes
-Set up data dictionary
-Projects page, bank marketing page
-Flexbox projects
+Implement sexy project cards, uncomment the tableau
+copy-paste it into projects page, DEPLOY!!!
 
 
 
@@ -10,7 +8,7 @@ Flexbox projects
 Post-deployment fixes:
 - Insert generative element - probably will just have placeholder for now
 - Deal with shrink and mobile layout
-
+- Sexier project flexbox
 
 Future improvements:
 - More sophisticated models like XGBoost...I actually had a try with it
