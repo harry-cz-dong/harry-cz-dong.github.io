@@ -1,27 +1,3 @@
-Implement sexy project cards, uncomment the tableau
-copy-paste it into projects page, DEPLOY!!!
-
-
-
------------------------------
-
-Post-deployment fixes:
-- Insert generative element - probably will just have placeholder for now
-- Deal with shrink and mobile layout
-- Sexier project flexbox
-
-Future improvements:
-- More sophisticated models like XGBoost...I actually had a try with it
-but performance was about the same as GLM
-- GET BETTER DATA - MORE ENTRIES, DIMENSIONS AND YEARS
-
-
-
-
-- Residual plot as 'diagnosis' for modelling section
-- Balance property
-- Pick most populous class as baseline?
-
 
 
 ----------------------------
@@ -39,8 +15,4 @@ Use flexboxes to have elements side by side, fill the divs to see placement
 
 
 -----------------------------
-
-<li> Gradient boosting: This technique essentially combines the predictions of simple models to form a more powerful model.
-		This  <span class="link"><a href="#">article</a></span> gives a more detailed explanation.
-		We use the <span class="tech">XGBoost</span> library, which is a handy and popular implementation.</li>
 
